@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']="postgres://ypenmacgwpxmfm:0e3d4ca190f9742e0f25a56c2a51d9075e3cf28bb3e0c2e44128f52f180bb69a@ec2-107-20-167-241.compute-1.amazonaws.com:5432/ddq8054gd9prrv"
 db=SQLAlchemy(app)
 
+#create a table
 class Data(db.Model):
     __tablename__="data"
     Name=db.Column(db.String, primary_key=True)
@@ -43,6 +44,7 @@ class Data(db.Model):
 def index():
     return render_template("index.html")
 
+#Define 2nd Route and Content
 @app.route("/success", methods=['POST'])
 def success():
     if(request.method == 'POST'):
@@ -62,6 +64,8 @@ def success():
         db.session.add(data)
         db.session.commit()
         return render_template("success.html")
+    
+#Running and Controlling the script
 if __name__ == '__main__':
     app.debug=True
     
