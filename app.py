@@ -63,7 +63,6 @@ def success():
         print(Email, Height)
         data=Data(Name, index, Email, Date, Blood_Pressure, Blood_Glucose, Weight, Height, Body_Temp, Medications_History, Diseases_History, Notes)
         db.session.add(data)
-        db.session.commit()
         return render_template("success.html")
 
     else:
