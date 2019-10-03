@@ -7,7 +7,7 @@ app = Flask(__name__)
 #Connect to the Database
 app.config['SQLALCHEMY_DATABASE_URI']="postgres://ypenmacgwpxmfm:0e3d4ca190f9742e0f25a56c2a51d9075e3cf28bb3e0c2e44128f52f180bb69a@ec2-107-20-167-241.compute-1.amazonaws.com:5432/ddq8054gd9prrv"
 db=SQLAlchemy(app)
-SQLALCHEMY_TRACK_MODIFICATIONS = False  
+ 
 #create a table
 class Data(db.Model):
     __tablename__="data"
@@ -64,9 +64,10 @@ def success():
         db.session.add(data)
         db.session.commit()
         return render_template("success.html")
-    
+    return render_template('index.html', text="Seems like we got something from that email once!")
+
 #Running and Controlling the script
 if __name__ == '__main__':
     app.debug=True
-    app.run(port=5004)
+    
     
