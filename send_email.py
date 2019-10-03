@@ -14,7 +14,7 @@ def send_email(Name, index, Email, Blood_pressure, Blood_Glucose, Weight, Height
     msg['To']=to_email
     msg['From']=from_email
 
-    gmail=smtplib.SMTP('smtp.gmail.com',587)
+    gmail=smtplib.SMTP('smtp.gmail.com',465)
     gmail.ehlo()
     gmail.starttls()
     gmail.login(from_email, from_password)
