@@ -1,9 +1,11 @@
 #Import dependencies
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from send_email import send_email
+from sqlalchemy.sql import func
 #Create instance of Flask App
 app = Flask(__name__)
-
+SQLALCHEMY_TRACK_MODIFICATIONS = True
 #Connect to the Database
 app.config['SQLALCHEMY_DATABASE_URI']="postgres://ypenmacgwpxmfm:0e3d4ca190f9742e0f25a56c2a51d9075e3cf28bb3e0c2e44128f52f180bb69a@ec2-107-20-167-241.compute-1.amazonaws.com:5432/ddq8054gd9prrv"
 db=SQLAlchemy(app)
@@ -11,8 +13,8 @@ db=SQLAlchemy(app)
 #create a table
 class Data(db.Model):
     __tablename__="data"
-    Name=db.Column(db.String, primary_key=True)
-    index=db.Column(db.Integer)
+    index=db.Column(db.Integer, primary_key=True)
+    Name=db.Column(db.String) 
     Email=db.Column(db.String) 
     Blood_Pressure=db.Column(db.String)
     Blood_Glucose=db.Column(db.String)
@@ -23,9 +25,9 @@ class Data(db.Model):
     Diseases_History=db.Column(db.String)
     Notes=db.Column(db.String)
 
-    def __init__(self, Name, index, Email, Blood_Pressure, Blood_Glucose, Weight, Height, Body_Temp, Medications_History, Diseases_History, Notes):
-        self.Name = Name
+    def __init__(self, index, Name,  Email, Blood_Pressure, Blood_Glucose, Weight, Height, Body_Temp, Medications_History, Diseases_History, Notes):
         self.index=index
+        self.Name = Name
         self.Email=Email
         self.Blood_Pressure=Blood_Pressure
         self.Blood_Glucose=Blood_Glucose
@@ -48,8 +50,8 @@ def index():
 @app.route("/success", methods=['POST'])
 def success():
     if(request.method == 'POST'):
-        Name=request.form["Name"]
         index=request.form["index"]
+        Name=request.form["Name"]
         Email=request.form["Email"]
         Blood_Pressure=request.form["Blood_Pressure"]
         Blood_Glucose=request.form["Blood_Glucose"]
@@ -59,8 +61,7 @@ def success():
         Medications_History=request.form["Medications_History"]
         Diseases_History=request.form["Diseases_History"]
         Notes = request.form["Notes"]  
-        data=Data(Name, index, Email, Blood_Pressure, Blood_Glucose, Weight, Height, Body_Temp, Medications_History, Diseases_History, Notes)
-
+        data=Data(index, Name, Email, Blood_Pressure, Blood_Glucose, Weight, Height, Body_Temp, Medications_History, Diseases_History, Notes)
         db.session.add(data)
         db.session.commit()
         return render_template("success.html")
@@ -69,5 +70,5 @@ def success():
 #Running and Controlling the script
 if __name__ == '__main__':
     app.debug=True
-    
+ 
     
