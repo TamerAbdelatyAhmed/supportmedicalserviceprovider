@@ -13,9 +13,9 @@ db=SQLAlchemy(app)
 #create a table
 class Data(db.Model):
     __tablename__="data"
-    index=db.Column(db.Integer, primary_key=True)
+    index=db.Column(db.Integer)
     Name=db.Column(db.String) 
-    Email=db.Column(db.String) 
+    Email=db.Column(db.String, primary_key=True) 
     Blood_Pressure=db.Column(db.String)
     Blood_Glucose=db.Column(db.String)
     Weight=db.Column(db.Integer)
