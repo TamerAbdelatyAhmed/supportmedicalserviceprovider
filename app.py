@@ -70,5 +70,3 @@ def success():
 #Running and Controlling the script
 if __name__ == '__main__':
     app.debug=True
-    app.run(port=5004)
-    
