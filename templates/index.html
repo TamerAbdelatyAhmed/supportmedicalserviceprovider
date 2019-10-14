@@ -18,8 +18,8 @@
         <div class="email"> {{text | safe}} </div>
         <form action="{{url_for('success')}}" method="POST">
           <br>
-          <input title="Your data will be safe with us" placeholder="Enter your name" type="text" name="Name" required> 
           <input title="Your data will be safe with us" placeholder="Enter your ID" type="number"name="index" required>
+          <input title="Your data will be safe with us" placeholder="Enter your name" type="text" name="Name" required> 
           <input title="Your email will be safe with us" placeholder="Enter your email address" type="email" name="Email" required>
           <input title="Your data will be safe with us" placeholder="Enter your Blood Pressre" type="number" min="50", max="250"name="Blood_Pressure" required>
           <input title="Your data will be safe with us" placeholder="Enter your Blood Glucose Level" type="number" min="50", max="600"name="Blood_Glucose" required>
