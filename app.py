@@ -1,7 +1,6 @@
 #Import dependencies
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from send_email import send_email
 from sqlalchemy.sql import func
 #Create instance of Flask App
 app = Flask(__name__)
